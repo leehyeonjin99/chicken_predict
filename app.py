@@ -7,13 +7,13 @@ import numpy as np
 
 st.set_page_config(layout = 'wide')
 
-total = pd.read_csv('../chicken_total.csv')
+total = pd.read_csv('./chicken_total.csv')
 X, y = total[total.columns[1:]].values, total['주문건수'].values
 gam = LinearGAM(s(0, n_splines = 15) + s(1, n_splines = 15) + s(2, n_splines = 15) + f(3) + f(4) + s(5, n_splines = 15)).gridsearch(X, y)
 
 def main():
     st.title("오늘의 치킨 판매양은?")
-    selected_gu = st.selectbox("어느 구에서 장사하시나요?\nwarning : 이외의 지역은 업데이트가 예정되어있습니다. 조금만 기다려주세요!!", ('구로구', '양천구', '은평구'))
+    selected_gu = st.selectbox("어느 구에서 장사하시나요? warning : 이외의 지역은 업데이트가 예정되어있습니다. 조금만 기다려주세요!!", ('구로구', '양천구', '은평구'))
     selected_date = st.date_input("오늘의 날짜")
     selected_dday = selected_date - datetime.date(selected_date.year, 1, 1)
     selected_dday = selected_dday.days + 1
