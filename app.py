@@ -13,7 +13,7 @@ gam = LinearGAM(s(0, n_splines = 15) + s(1, n_splines = 15) + s(2, n_splines = 1
 
 def main():
     st.title("오늘의 치킨 판매양은?")
-    selected_gu = st.selectbox("어느 구에서 장사하시나요? warning : 이외의 지역은 업데이트가 예정되어있습니다. 조금만 기다려주세요!!", ('구로구', '영등포구', '은평구'))
+    selected_gu = st.selectbox("어느 구에서 장사하시나요? warning : 이외의 지역은 업데이트가 예정되어있습니다. 조금만 기다려주세요!!", ('구로구', '양천구', '은평구'))
     selected_date = st.date_input("오늘의 날짜")
     selected_dday = selected_date - datetime.date(selected_date.year, 1, 1)
     selected_dday = selected_dday.days + 1
@@ -22,7 +22,7 @@ def main():
     selected_rain = st.number_input("오늘의 평균 강수량(mm)")
     selected_wind = st.number_input("오늘의 평균 풍속(m/s)")
 
-    gu = {'영등포구' : 0, '은평구' : 1, '구로구' : 2}
+    gu = {'양천구' : 0, '은평구' : 1, '구로구' : 2}
     input = np.array([[selected_temp, selected_rain, selected_wind, gu[selected_gu],  selected_day_of_week, selected_dday]])
     output = gam.predict(input)
     
